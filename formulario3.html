@@ -6,16 +6,45 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Formulario</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
     </head>
     <body>
-        <div>Formulario Nombre y Edad</div>
-        <form action="resultado3.php" method="GET">
-            <p>Nombre: <input type="text" name="nombre"/>
-            <p>Edad: <input type="text" name="edad"/>
-            <p><input type="submit" value="Enviar"/></p>
+        <div>Formulario a validar</div>
+         <form action="resultado3.php" method="get">
+             <p><input type="text" name="nombre"/></p>
+             <p><input name="edad" type="text" value="18"/></p>
+          <!--checkbox -->
+          <p>Solicita beca: <input type="checkbox" name="beca"/></p>
+          
+          <!-- tipo radio -->
+         <p>Sexo:</br>
+          <input type="radio" name="sexo" value="masculino"/>Masculino
+          <input type="radio" name="sexo" value="femenino"/>Femenino
+          </p>
+          
+          <!--lista -->
+          <p> Estado civil:
+          <select name="estado">
+              <option selected="selected" disabled="disabled">Seleccionar... </option>
+              <option>Soltero/a </option>
+              <option>Casado/a </option>
+              <option>Divorciado/a </option>
+              <option>Viudo/a </option>
+          </select>
+          </p>
+          <p> Aficiones
+          <select name="aficiones" size="3" multiple="multiple">
+              <option>Deportes</option>
+              <option>Cine</option>
+              <option>Televisión</option>
+              <option>Lecturas</option>
+              <option>Otros</option>
+          </select>
+          </p>
+          
+          <input type="submit" value="enviar"/>
         </form>
     </body>
 </html>
