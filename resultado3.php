@@ -76,10 +76,8 @@
                 }
                 echo "</br> Sexo: ".$sexo;
                 echo "</br> Estado civil: ".$estado;
-                echo "</br> Aficiones elegidas: ";
-                foreach($aficiones as $aficion){
-                    echo $aficion."</br>";
-                }
+                echo "</br> Aficion = ".$aficiones.
+                print_r($aficiones);
          } else {
             //Si hay error
             echo $mensaje_error;
