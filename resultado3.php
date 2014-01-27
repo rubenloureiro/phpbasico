@@ -1,7 +1,7 @@
 <?php require_once 'validar.php';?>
 <html>
     <head>
-        <title>Resultado</title>
+        <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
     </head>
@@ -46,7 +46,7 @@
                 $error = true;
                 $mensaje_error .= " La edad debe ser un nÃºmero entre 1 y 100";
              }  /*else {
-                 // la edad estÃ¡ entre 0 y 100
+                 // la edad está entre 0 y 100
                  if ($edad <= 0 || $edad > 100) {
                      $error = true;
                      $mensaje_error .= " La edad debe estar entre 0 y 100";
@@ -76,19 +76,13 @@
                 }
                 echo "</br> Sexo: ".$sexo;
                 echo "</br> Estado civil: ".$estado;
-                echo "</br> Aficion = ".$aficiones.
-                print_r($aficiones);
+                echo "</br> Aficiones elegidas: ".$aficion;
          } else {
             //Si hay error
             echo $mensaje_error;
             echo "</br>";
             echo "<a href='javascript:history.go(-1);'> Volver al formulario </a>";
-         }
-            
-                
-            
-                   
-               
+         }   
         ?>
     </body>
 </html>

@@ -1,5 +1,4 @@
 <?php
-
 /* 
 Funciones para validar formularios
  */
