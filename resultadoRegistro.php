@@ -1,60 +1,68 @@
-<?php require_once 'funcionesRegistro.php'; ?>
+<?php
+require_once 'funcionesRegistro.php';
+/**
+ * Verifica que los datos recibidos por $_REQUEST son válidos
+ * @return bool True si son válidos, False en caso contrario
+ */
+function validarDatosRegistro() {
+    /**
+     * validar login
+     * validar password
+     * validar password2 es igual a password
+     * validar email
+     */
+    
+    
+    //Entrada de datos
+    $resultadoValidacion = True;
+    
+    $login = (isset ($_REQUEST['login']))?
+            $_REQUEST['login']:"";
+    
+    $password = (isset ($_REQUEST['password']))?
+            $_REQUEST['password']:"";
+    
+    $password2 = (isset ($_REQUEST['password2']))?
+            $_REQUEST['password2']:"";
+    
+    $email = (isset ($_REQUEST['email']))?
+            $_REQUEST['email']:"";
+    
+    //Llamada a las funciones
+    if (!validarLogin($login)) {
+        $resultadoValidacion = False;
+    }
+
+    if (!validarPass($password)) {
+       $resultadoValidacion = False;
+    }
+    
+    if (!LongPass($password, $password2)) {
+       $resultadoValidacion = False;
+    }
+  
+    if (!validarMail($email)) {
+        $resultadoValidacion = False;
+    }
+    
+//Salida de datos
+return $resultadoValidacion;
+}
+?>
 <html>
     <head>
+        <title>Resultado Registro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
     </head>
     <body>
+        <div>Resultado Registro</div>
         <?php
-        //Entrada de datos
-        $salida= $_REQUEST;
-        $login= $_REQUEST['login'];
-        $password= $_REQUEST['password'];
-        $password2= $_REQUEST['password2'];
-        $email= $_REQUEST['email'];   
-        $error="";
-
-        //Validar nombre (longitud)
-        if (!enRango($login)){
-            $error.="<li> El nombre es demasiado corto o demasiado largo (3-10) o no existe.</li>";
-        }
-        
-        //Validar nombre (letras y números)
-        if (!esAlfaNum($login)){
-            $error.="<li> El nombre debe estar compuesto por caracteres alfanumericos.</li>";
-        }
-        
-        //Validar contraseña (longitud)
-        if (!enRango($password)){
-            $error.="<li> La contrasena es demasiado corta o demasiado larga (3-10) o no existe.</li>";
-        }
-        
-        //Validar contraseña (letras y números)
-        if (!esAlfaNum($password)) {
-            $error.="<li> La contrasena debe estar compuesta por caracteres alfanumericos.</li>";
-        }
-        
-        //Validar contraseñas (comparación)
-        if (!sonIguales($password,$password2)){
-            $error.="<li> Las contrasenas deben ser iguales.</li>";
-        }
-        
-        //Validar correo
-        if (isset($email)&&!esEmail($email)){
-            $error.="<li> El correo electronico debe tener estructura de email.</li>";
-            
-        }
-        
-        //Salida de datos
-        if ($error==""){
-            echo "<ul>";
-            foreach ($salida as $valor) {
-                echo "<li>".$valor."</li>";
+            if (validarDatosRegistro()) {
+                echo "Datos correctos. Se puede registrar.";
+            } else {
+                echo "Error en los datos.";
             }
-            echo "</ul>"; 
-        } else {
-            echo "<ul>";
-            echo $error;
-            echo "</ul>";
-        }
-        ?>
+        ?>    
     </body>
 </html>

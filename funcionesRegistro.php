@@ -1,46 +1,51 @@
 <?php
-/**
- * Constantes para longitud de login y password
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-define ("longmax", "11"); 
-define ("longmin", "3");
+define('LOGIN_MIN', 3); 
+define('LOGIN_MAX', 10); 
+define('PASS_MIN', 5); 
+define('PASS_MAX', 10); 
+/**
+ * enRango
+ * Indica si un valor está en un rango determinado [inicio,fin]
+ * @param inicio
+ * @param fin
+ * @param valor
+ * @return true si valor esta en el rango [inicio, fin], sino false
+ */
+function enRango($inicio, $fin, $valor) {
+    return ($valor>=$inicio && $valor<=$fin);
+}
 
 /**
- * Función para comprobar longitud
+ * validarLogin
+ * La longitud debe estar entre LOGIN_MIN y LOGIN_MAX
+ * y debe contener solo letras y números (patrón)
+ * @param login
+ * @return bool 
  */
-function enRango ($cadena) {
-   $resultado=false;
-   if (strlen ($cadena)>=longmin && strlen($cadena)<longmax){
-       $resultado=true;
-   }
-   return $resultado;
+function validarLogin($login) {
+    $patron = "/^[[:alnum:]]+$/";
+    $longitud = strlen($login);
+    return (enRango(LOGIN_MIN, LOGIN_MAX, $longitud) 
+            && preg_match($patron, $login));
 }
 
-//Función para comprobar si una cadena es alfanumérica
-function esAlfaNum ($cadena){
-    $resultado=false;
-    if (ctype_alnum($cadena)){
-        $resultado=true;
-    }
-    return $resultado;
+function validarPass($password) {
+    $patron = "/^[[:alnum:]]+$/";
+    $longitud = strlen($password);
+    return (enRango(PASS_MIN, PASS_MAX, $longitud) 
+            && preg_match($patron, $password));
 }
 
-//Función para comprobar si dos cadenas son iguales
-function sonIguales ($cadena1,$cadena2){
-    $resultado=false;
-    if ($cadena1==$cadena2) {
-        $resultado=true;
-    }
-    return $resultado;
+function LongPass ($password, $password2) {
+    return ($password == $password2);
 }
 
-//Función para comprobar si un mail tiene la estructura correcta
-function esEmail ($cadena){
-    $resultado=false;
-    if (filter_var($cadena, FILTER_VALIDATE_EMAIL)){
-        $resultado=true;
-    }
-    return $resultado;
+function validarMail ($email) {
+    return (filter_var ($email, FILTER_VALIDATE_EMAIL));
 }
-
-?>
