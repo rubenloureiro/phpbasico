@@ -1,5 +1,7 @@
 <?php
 require_once 'funcionesRegistro.php';
+require_once 'erroresRegistro.php';
+
 /**
  * Verifica que los datos recibidos por $_REQUEST son válidos
  * @return bool True si son válidos, False en caso contrario
@@ -14,7 +16,7 @@ function validarDatosRegistro() {
     
     
     //Entrada de datos
-    $resultadoValidacion = True;
+    $resultadoValidacion = array();
     
     $login = (isset ($_REQUEST['login']))?
             $_REQUEST['login']:"";
@@ -30,19 +32,19 @@ function validarDatosRegistro() {
     
     //Llamada a las funciones
     if (!validarLogin($login)) {
-        $resultadoValidacion = False;
+        $resultadoValidacion[] = MSG_ERR_LOGIN ;
     }
 
     if (!validarPass($password)) {
-       $resultadoValidacion = False;
+       $resultadoValidacion[] = MSG_ERR_PASS;
     }
     
     if (!longPass($password, $password2)) {
-       $resultadoValidacion = False;
+       $resultadoValidacion[] = MSG_ERR_PASS2;
     }
   
     if (!validarMail($email)) {
-        $resultadoValidacion = False;
+        $resultadoValidacion[] = MSG_ERR_EMAIL;
     }
     
 //Salida de datos
