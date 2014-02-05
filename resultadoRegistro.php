@@ -32,15 +32,15 @@ function validarDatosRegistro() {
     
     //Llamada a las funciones
     if (!validarLogin($login)) {
-        $resultadoValidacion[] = MSG_ERR_LOGIN ;
+        $resultadoValidacion[] = MSG_ERR_LOGIN;
     }
 
     if (!validarPass($password)) {
-       $resultadoValidacion[] = MSG_ERR_PASS;
+       $resultadoValidacion[] = MSG_ERR_PASS; 
     }
     
     if (!longPass($password, $password2)) {
-       $resultadoValidacion[] = MSG_ERR_PASS2;
+       $resultadoValidacion[] = MSG_ERR_PASS2; 
     }
   
     if (!validarMail($email)) {
@@ -62,10 +62,15 @@ return $resultadoValidacion;
     <body>
         <div>Resultado Registro</div>
         <?php
-            if (validarDatosRegistro()) {
+            $errores = validarDatosRegistro();
+            if (count ($errores)==0) {
                 echo "Datos correctos. Se puede registrar.";
             } else {
-                echo "Error en los datos. Revise los datos.";
+                echo "Error en los datos.<br>";
+                foreach ($errores as $error) {
+                    echo $error. '<br>';
+                }
+                echo "<a href='javascript:history.go(-1);'> Volver al formulario.</a>";
             }
         ?>    
     </body>
