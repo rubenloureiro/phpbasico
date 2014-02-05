@@ -37,7 +37,7 @@ function validarDatosRegistro() {
        $resultadoValidacion = False;
     }
     
-    if (!LongPass($password, $password2)) {
+    if (!longPass($password, $password2)) {
        $resultadoValidacion = False;
     }
   
@@ -48,7 +48,9 @@ function validarDatosRegistro() {
 //Salida de datos
 return $resultadoValidacion;
 }
+
 ?>
+
 <html>
     <head>
         <title>Resultado Registro</title>
@@ -61,7 +63,7 @@ return $resultadoValidacion;
             if (validarDatosRegistro()) {
                 echo "Datos correctos. Se puede registrar.";
             } else {
-                echo "Error en los datos.";
+                echo "Error en los datos. Revise los datos.";
             }
         ?>    
     </body>

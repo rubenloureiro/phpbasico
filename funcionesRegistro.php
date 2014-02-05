@@ -9,6 +9,7 @@ define('LOGIN_MIN', 3);
 define('LOGIN_MAX', 10); 
 define('PASS_MIN', 5); 
 define('PASS_MAX', 10); 
+
 /**
  * enRango
  * Indica si un valor está en un rango determinado [inicio,fin]
@@ -35,6 +36,14 @@ function validarLogin($login) {
             && preg_match($patron, $login));
 }
 
+
+/**
+ * validarPass
+ * La longitud debe estar entre PASS_MIN y PASS_MAX
+ * y debe contener solo letras y números (patrón)
+ * @param password
+ * @return bool 
+ */
 function validarPass($password) {
     $patron = "/^[[:alnum:]]+$/";
     $longitud = strlen($password);
@@ -42,10 +51,22 @@ function validarPass($password) {
             && preg_match($patron, $password));
 }
 
-function LongPass ($password, $password2) {
+/**
+ * longPass
+ * Las contraseñas deben ser iguales
+ * @param password, password2
+ * @return bool 
+ */
+function longPass ($password, $password2) {
     return ($password == $password2);
 }
 
+/**
+ * validarMail
+ * El mail debe tener un formato correcto
+ * @param email
+ * @return bool 
+ */
 function validarMail ($email) {
     return (filter_var ($email, FILTER_VALIDATE_EMAIL));
 }
