@@ -1,6 +1,7 @@
 <?php
-require_once 'funcionesRegistro.php';
-require_once 'erroresRegistro.php';
+session_start();
+require_once 'funciones_registro.php';
+require_once 'errores_registro.php';
 
 /**
  * Verifica que los datos recibidos por $_REQUEST son válidos
@@ -16,7 +17,7 @@ function validarDatosRegistro() {
     
     
     //Entrada de datos
-    $resultadoValidacion = array();
+    $resultadoValidacion[] = ['', '', '', ''];
     
     $login = (isset ($_REQUEST['login']))?
             $_REQUEST['login']:"";
@@ -50,7 +51,14 @@ function validarDatosRegistro() {
 //Salida de datos
 return $resultadoValidacion;
 }
-
+function hayErrores ($errores) {
+    for ($i=0; $i<4; $i++) {
+        if (strlen($errores[$i]>=0)){
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
 ?>
 
 <html>
@@ -66,11 +74,10 @@ return $resultadoValidacion;
             if (count ($errores)==0) {
                 echo "Datos correctos. Se puede registrar.";
             } else {
-                echo "Error en los datos.<br>";
-                foreach ($errores as $error) {
-                    echo $error. '<br>';
-                }
-                echo "<a href='javascript:history.go(-1);'> Volver al formulario.</a>";
+                $_SESSION['errores'] = $errores;
+                $url = "formularioRegistro1.php?".
+                        $_SERVER['QUERY_STRING'];
+                header('Location:'.$url);
             }
         ?>    
     </body>
