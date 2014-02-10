@@ -17,7 +17,7 @@ function validarDatosRegistro() {
     
     
     //Entrada de datos
-    $resultadoValidacion[] = ['', '', '', ''];
+    $resultadoValidacion = array ('', '', '', '');
     
     $login = (isset ($_REQUEST['login']))?
             $_REQUEST['login']:"";
@@ -33,19 +33,19 @@ function validarDatosRegistro() {
     
     //Llamada a las funciones
     if (!validarLogin($login)) {
-        $resultadoValidacion[] = MSG_ERR_LOGIN;
+        $resultadoValidacion[0] = MSG_ERR_LOGIN;
     }
 
     if (!validarPass($password)) {
-       $resultadoValidacion[] = MSG_ERR_PASS; 
+       $resultadoValidacion[1] = MSG_ERR_PASS; 
     }
     
     if (!longPass($password, $password2)) {
-       $resultadoValidacion[] = MSG_ERR_PASS2; 
+       $resultadoValidacion[2] = MSG_ERR_PASS2; 
     }
   
     if (!validarMail($email)) {
-        $resultadoValidacion[] = MSG_ERR_EMAIL;
+        $resultadoValidacion[3] = MSG_ERR_EMAIL;
     }
     
 //Salida de datos
@@ -53,7 +53,7 @@ return $resultadoValidacion;
 }
 function hayErrores ($errores) {
     for ($i=0; $i<4; $i++) {
-        if (strlen($errores[$i]>=0)){
+        if (strlen($errores[$i])>=0){
             return TRUE;
         }
     }
@@ -75,7 +75,7 @@ function hayErrores ($errores) {
                 echo "Datos correctos. Se puede registrar.";
             } else {
                 $_SESSION['errores'] = $errores;
-                $url = "formularioRegistro1.php?".
+                $url = "formulario_Registro_1.php?".
                         $_SERVER['QUERY_STRING'];
                 header('Location:'.$url);
             }
