@@ -44,7 +44,7 @@ function validarLogin($login) {
  * @param password
  * @return bool 
  */
-function validarPass($password) {
+function validarPassword($password) {
     $patron = "/^[[:alnum:]]+$/";
     $longitud = strlen($password);
     return (enRango(PASS_MIN, PASS_MAX, $longitud) 
@@ -67,6 +67,6 @@ function longPass ($password, $password2) {
  * @param email
  * @return bool 
  */
-function validarMail ($email) {
+function validarEmail ($email) {
     return (filter_var ($email, FILTER_VALIDATE_EMAIL));
 }

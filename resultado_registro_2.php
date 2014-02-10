@@ -16,10 +16,13 @@ function validarDatosRegistro() {
     
     $login = (isset($_REQUEST['login']))?
             $_REQUEST['login']:"";
+    
     $password = (isset($_REQUEST['password']))?
             $_REQUEST['password']:"";
+    
     $password2 = (isset($_REQUEST['password2']))?
             $_REQUEST['password2']:"";
+    
     $email = (isset($_REQUEST['email']))?
             $_REQUEST['email']:"";
     
