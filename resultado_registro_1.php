@@ -53,7 +53,7 @@ return $resultadoValidacion;
 }
 function hayErrores ($errores) {
     for ($i=0; $i<4; $i++) {
-        if (strlen($errores[$i])>=0){
+        if (strlen($errores[$i])>0){
             return TRUE;
         }
     }
@@ -71,7 +71,7 @@ function hayErrores ($errores) {
         <div>Resultado Registro</div>
         <?php
             $errores = validarDatosRegistro();
-            if (count ($errores)==0) {
+            if (!hayErrores ($errores)) {
                 echo "Datos correctos. Se puede registrar.";
             } else {
                 $_SESSION['errores'] = $errores;

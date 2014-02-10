@@ -8,7 +8,7 @@ session_start();
             $_REQUEST['email']:"";
     
         $errores = (isset ($_SESSION['errores']))?
-            $_SESSION['errores']:array();
+            $_SESSION['errores']:array('','','','');
     
         unset($_SESSION['errores']);
 ?>
@@ -34,9 +34,13 @@ Email (obligatorio, estructura correcta)
         </div>
         <form action="resultado_registro_1.php" method="get">
             <div>Login: <br><input type="text" name="login" value="<?php echo $login; ?>"/></div>
+            <div><?php echo $errores[0];?></div>
             <div>Contraseña: <br><input type="password" name="password"/></div>
+            <div><?php echo $errores[1];?></div>
             <div>Repita contraseña: <br><input type="password" name="password2"/></div>
+            <div><?php echo $errores[2];?></div>
             <div>Email: <br><input type="text" name="email" value="<?php echo $email; ?>"/></div>
+            <div><?php echo $errores[3];?></div>
             <input type="submit" name="enviar" value="Registrar"/>
         </form>
     </body>
