@@ -8,14 +8,22 @@ session_start();
             $_REQUEST['email']:"";
     
     //Estructura para errores
-        $hayError = (isset ($_REQUEST ['hayError']))?
-                $_REQUEST['hayError']:'';
+        $errLogin = (isset ($_REQUEST ['errLogin']))?
+                $_REQUEST['errLogin']:FALSE;
         
-        $msgErrores = (isset ($_SESSION['msgErrores']))?
-            $_SESSION['errores']:array('','','','');
+        $errPassword = (isset ($_SESSION['errPassword']))?
+            $_SESSION['errPassword']:FALSE;
+        
+        $errPassword2 = (isset ($_SESSION['errPassword2']))?
+            $_SESSION['errPassword2']:FALSE;
+        
+        $errEmail = (isset ($_SESSION['errEMail']))?
+            $_SESSION['errEMail']:FALSE;
     
-        unset($_SESSION['hsyError']);
-        unset($_SESSION['msgErrores']);
+        unset($_SESSION['errLogin']);
+        unset($_SESSION['errPassword']);
+        unset($_SESSION['errPassword2']);
+        unset($_SESSION['errEmail']);
 ?>
 
 <!DOCTYPE html>
@@ -32,20 +40,32 @@ Email (obligatorio, estructura correcta)
     </head>
     <body>
         <div><b>Formulario de Registro</b></div>
-        <div>
-            <?php
-            print_r($errores);
-            ?>
-        </div>
-        <form action="resultado_registro_1.php" method="get">
+
+        <form action="resultado_registro_2.php" method="get">
             <div>Login: <br><input type="text" name="login" value="<?php echo $login; ?>"/></div>
-            <div><?php echo $errores[0];?></div>
+            <div>
+            <?php
+            if ($errLogin) MSG_ERR_LOGIN;
+            ?>
+            </div>
             <div>Contraseña: <br><input type="password" name="password"/></div>
-            <div><?php echo $errores[1];?></div>
+            <div>
+            <?php
+            if ($errPassword) MSG_ERR_PASS;
+            ?>
+            </div>
             <div>Repita contraseña: <br><input type="password" name="password2"/></div>
-            <div><?php echo $errores[2];?></div>
+            <div>
+            <?php
+            if ($errPassword2) MSG_ERR_PASS2;
+            ?>    
+            </div>
             <div>Email: <br><input type="text" name="email" value="<?php echo $email; ?>"/></div>
-            <div><?php echo $errores[3];?></div>
+            <div>
+            <?php
+            if ($errEmail) MSG_ERR_EMAIL;
+            ?>
+            </div>
             <input type="submit" name="enviar" value="Registrar"/>
         </form>
     </body>
